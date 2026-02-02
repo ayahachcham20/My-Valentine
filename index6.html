@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine for Lyazid</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #f3a6b5;
+  --red: #e06a6a;
+  --green: #7fa88a;
+  --white: #ffffff;
+  --text: #2f3e34;
+}
+
+*{box-sizing:border-box;}
+
+body {
+  margin:0;
+  height:100vh;
+  font-family:'Inter', sans-serif;
+  background: linear-gradient(135deg, #e9f2ed, #fde7ec);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--text);
+}
+
+.card {
+  background: rgba(255,255,255,0.95);
+  padding: 3.6rem 3.2rem;
+  border-radius: 28px;
+  max-width: 520px;
+  width: 94%;
+  text-align:center;
+  box-shadow:0 35px 70px rgba(0,0,0,0.1);
+  z-index:2;
+  animation: fadeIn 1s ease;
+}
+
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:2rem;
+  color:#d46a8c;
+  margin-bottom:1.6rem;
+}
+
+p {
+  font-size:1.05rem;
+  line-height:1.75;
+  margin-bottom:2.8rem;
+  color:#4b5f55;
+}
+
+.question {
+  font-family:'Playfair Display', serif;
+  font-size:2rem;
+  margin-bottom:3rem;
+}
+
+button {
+  border:none;
+  padding:1rem 2.4rem;
+  font-size:1.05rem;
+  border-radius:40px;
+  cursor:pointer;
+  background: linear-gradient(135deg, #f3a6b5, #7fa88a, #e06a6a);
+  color:white;
+  transition: all 0.25s ease;
+}
+
+button:hover{
+  transform: translateY(-3px);
+  box-shadow:0 12px 24px rgba(0,0,0,0.18);
+}
+
+.hidden{display:none;}
+
+.result{
+  font-family:'Playfair Display', serif;
+  font-size:1.95rem;
+  color:#d46a8c;
+}
+
+.sub{
+  margin-top:1.6rem;
+  font-size:1.05rem;
+  color:#5f776a;
+  line-height:1.7;
+}
+
+/* Inline red hearts */
+.red-heart {
+  color: red;
+  font-size: 1.3em;
+  margin-left: 4px;
+}
+
+/* Big heart for Google Meet sentence */
+.big-heart {
+  color: red;
+  font-size: 3em;
+  display:block;
+  margin: 1rem auto 0 auto;
+}
+
+/* Floating shapes */
+.float {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+  animation: float linear infinite;
+}
+
+.heart {
+  background: red;
+  clip-path: polygon(
+    50% 0%, 61% 9%, 68% 18%, 70% 27%, 70% 36%, 63% 48%, 50% 60%, 37% 48%, 30% 36%, 30% 27%, 32% 18%, 39% 9%
+  );
+}
+
+.flower {
+  background: pink;
+  border-radius: 50%;
+}
+
+.butterfly {
+  width: 24px; height: 24px;
+  background: linear-gradient(to right, #f3a6b5, #7fa88a);
+  clip-path: polygon(50% 0%, 61% 9%, 68% 18%, 70% 27%, 70% 36%, 63% 48%, 50% 60%, 37% 48%, 30% 36%, 30% 27%, 32% 18%, 39% 9%);
+}
+
+@keyframes float{
+  0% {transform: translateY(-10vh) translateX(0) rotate(0deg);}
+  100% {transform: translateY(110vh) translateX(60px) rotate(360deg);}
+}
+
+@keyframes fadeIn{from{opacity:0;transform: translateY(16px);} to{opacity:1; transform: translateY(0);}}
+</style>
+</head>
+<body>
+
+<audio autoplay loop volume="0.15">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9b9f8a4c7c.mp3" type="audio/mpeg">
+</audio>
+
+<!-- First card -->
+<div class="card" id="card">
+  <h1>Hey, handsome <span class="red-heart">❤️</span></h1>
+  <p>I've been meaning to ask you a question <span class="red-heart">❤️</span></p>
+  <div class="question">Lyazid, my love, would you be my Valentine? <span class="red-heart">❤️</span></div>
+  <button onclick="sayYes()">Yes 🌸💚</button>
+</div>
+
+<!-- Second card -->
+<div class="card hidden" id="result">
+  <div class="result">Great my love, then it's a date! <span class="red-heart">❤️</span></div>
+  <div class="sub">I love you so much.<br>I can't wait for that Google Meet! <span class="big-heart">❤️</span></div>
+</div>
+
+<!-- Floating elements after yes -->
+<script>
+function sayYes(){
+  document.getElementById("card").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  const types = ["heart","flower","butterfly"];
+  for(let i=0;i<60;i++){
+    const el = document.createElement("div");
+    const type = types[Math.floor(Math.random()*types.length)];
+    el.className = `float ${type}`;
+    el.style.left = Math.random()*100+"vw";
+    el.style.top = Math.random()*-20+"vh";
+    el.style.animationDuration = 6 + Math.random()*8 + "s";
+    el.style.opacity = 0.4 + Math.random()*0.6;
+    el.style.transform = `scale(${0.6 + Math.random()})`;
+    document.body.appendChild(el);
+  }
+}
+</script>
+</body>
+</html>
